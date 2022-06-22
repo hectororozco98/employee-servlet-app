@@ -2,6 +2,7 @@ package com.revature.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -70,11 +71,70 @@ public class RequestHelper {
 			out.println("<h1>No user found, sorry</h1>");
 			//response.setStatus(204); // 204 means successful connection to the server, but no content found
 			
-		}
+		}	
 		
+	}
+	
+	public static void processRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 1. extract all values from the parameters
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
+		
+		
+		// 2. construct a new employee object
+		Employee e = new Employee(firstname, lastname, username, password);
+		
+		// 3. call the register method from the service layer
+		int pk = eserv.register(e);
+		
+		// 4. check its id, if its greater than 0, it's successful
+		if (pk > 0) {
 			
+			e.setId(pk);
+			//add the user to the session
+			HttpSession ses = request.getSession();
+			ses.setAttribute("the-user", e);
+			
+			// using the request dispatcher, forward the request and the response to a new resource
+			// send the user to a new page, which is welcome.html
+			request.getRequestDispatcher("welcome.html").forward(request, response);
+		} else {
+			
+			// if it's -1, the register method failed (there is a duplicate)
+			// use the PrintWriter to print it out
+			
+			// TODO: provide better logic in the Service layer to check for PSQL exceptions
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			
+			out.println("<h1>Registration failed. User already exists</h1>");
+			out.println("<a href =\"index.html\">Back</a>");	
+		}	
+	}
+	
+	// this method will call the employee services findAll() method
+	// use an object mapper to transform that list to a json string
+			// user PrintWriter to print out the json string to the screen
+	
+	public static void processEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		// 1. set content type to be application.json
+		//response.setContentType("application/json");
+		response.setContentType("text/html");
+		
+		// 2. call the findall method
+		List<Employee> emps = eserv.getAll();
+		
+		// 3. transform the list to a string
+		String jsonString = om.writeValueAsString(emps);
+		
+		// 4. get print writer, then write it out
+		PrintWriter out = response.getWriter();
+		out.write(jsonString); // write the string to the response body
 		
 	}
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+</head>
+<body>
+
+	<h1>Welcome Stranger</h1>
+	<h3>Please Sign up below</h3>
+
+	<form method="POST" action="register">
+		<!-- htt[://localhost:8080/employeea-ser -->
+
+		<!-- webxml register url pattern to point to fron tcontroller
+					-- set up a case for a register url in the front controller
+					-- set upp the actual functionality in the RequestHelper
+					-- in the requesthelper call the service layer to insert an employee object
+					-- constructed from the parameters of the request
+				 -->
+
+		<label>First Name</label> 
+		<input type="text" name="firstname" placeholder="Enter a first name"> 
+		<br /> 
+		
+		<label>Last Name</label> 
+		<input type="text" name="lastname" placeholder="Enter a last name"> 
+		<br /> 
+		
+		<label>Username</label> 
+		<input type="text" name="username" placeholder="Enter a username">
+		<br /> 
+		
+		<label>Password</label> 
+		<input type="password" name="password" placeholder="Enter a password"> 
+		
+		<input type="submit" value="register">
+
+	</form>
+</body>
+</html>

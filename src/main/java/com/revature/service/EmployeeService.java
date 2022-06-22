@@ -27,6 +27,13 @@ public class EmployeeService {
 	 * Our servlet will pass the username and password
 	 */
 	
+	// this service method returns the PK returned by the dao
+	public int register(Employee e) {
+		
+		// the dao method returns the PK
+		return edao.insert(e);	
+	}
+	
 	public Employee confirmLogin(String username, String password) {
 		
 		// strea mthroug hall the employeees that are returned
@@ -36,9 +43,10 @@ public class EmployeeService {
 		
 		// IF the employee is present, return it, otherwise return an empty Employee object with Id of 0
 		return (possibleEmp.isPresent() ? possibleEmp.get() : new Employee());
-		// ideally you should optimize thius and setup a custom exception
+		// ideally you should optimize this and setup a custom exception
 	
 	}
+	
 	
 	public List<Employee> getAll() {
 		
