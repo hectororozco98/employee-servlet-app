@@ -5,7 +5,7 @@ FROM tomcat:8.0-jre8
 LABEL maintainer="Hector"
 
 # We need to move the war file to teh webapps directory
-ADD target/employee-servlet-app.war /usr/local/lomcat/webapps
+ADD target/employee-servlet-app.war /usr/local/tomcat/webapps
 # the webapps directory containts the app that tomcat serves
 
 # Expose port 8080 from the container
