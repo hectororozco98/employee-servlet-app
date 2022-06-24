@@ -23,6 +23,9 @@ public class FrontController extends HttpServlet {
 		// http://localhost:8080/employee-servlet-app/employees -- if they go here it
 		// returns all employees in the DB
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		
+		System.out.println("Content Example: " + getServletContext().getInitParameter("contextExample"));
+		System.out.println("Config Example: " + getServletContext().getInitParameter("configExample"));
 
 		// set up a switch case statement in which we call the appropriate functionality
 		// based on the URI returned
