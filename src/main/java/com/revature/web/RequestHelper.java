@@ -124,7 +124,8 @@ public class RequestHelper {
 		
 		// 1. set content type to be application.json
 		//response.setContentType("application/json");
-		response.setContentType("text/html");
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		// 2. call the findall method
 		List<Employee> emps = eserv.getAll();

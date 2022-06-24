@@ -5,9 +5,26 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   
+   <!--
+  <context-param>
+  	<param-name>contextExample</param-name>
+  	<param_value>Global info accessible to all</param_value>
+   </context-param>
+  -->
+  
   <servlet>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>com.revature.web.FrontController</servlet-class>
+    <init-param>
+    	<param-name>configExample</param-name>
+    	<param-value>Info unique to just this Direct Servlet</param-value>
+    </init-param>
+    
+     <init-param>
+    	<param-name>specificInfo</param-name>
+    	<param-value>XYZ</param-value>
+    </init-param>
+    
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
