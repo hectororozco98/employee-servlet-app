@@ -77,8 +77,12 @@ function fetchEmps() {
     // that you get back asynchronously
 
     let hostname = window.location.hostname // grabs ip of where its deployed
+    
+    // for localhost
+    //fetch(`http://${hostname}:8080/employee-servlet-app/employees`)
 
-    fetch(`http://${hostname}:8080/employee-servlet-app/employees`)
+    // when deploying on EC2
+    fetch(`http://${hostname}/employee-servlet-app/employees`)
     .then(response => response.json()) // this takes a json string and transforms it 
                                     // to a javascript object
     //.then(Obj => console.log(Obj)) // print Js obj to the console
